@@ -6,266 +6,2034 @@
     <title>Melbourne Coffee Roasting Co.</title>
     <style>
         :root {
-            --brown: #4A2F1F;
-            --cream: #F5E8C7;
-            --accent: #C19A6B;
+            --espresso: #2f211b;
+            --coffee: #5b3524;
+            --caramel: #b57942;
+            --cream: #f6efe2;
+            --paper: #fffbf3;
+            --sage: #66785f;
+            --mint: #d7e1d1;
+            --terracotta: #bc684b;
+            --ink: #231f20;
+            --muted: #756b62;
+            --line: #dfd1bf;
+            --white: #ffffff;
+            --shadow: 0 18px 45px rgba(47, 33, 27, 0.13);
+            --soft-shadow: 0 10px 24px rgba(47, 33, 27, 0.1);
+            --radius: 8px;
+            --display: Georgia, "Times New Roman", serif;
+            --body: Arial, Helvetica, sans-serif;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, sans-serif; line-height: 1.6; color: #333; }
 
-        .shipping-bar { background: #F5E8C7; color: var(--brown); text-align: center; padding: 10px 0; font-weight: 500; }
-        header { background: var(--brown); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.6rem; font-weight: bold; color: var(--accent); }
-
-        .section { display: none; }
-        .section.active { display: block; }
-
-        .hero { 
-            height: 100vh; 
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
-            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
-            margin-top: 57px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .hero-content h1 { font-size: 3.8rem; margin-bottom: 1rem; }
-        .hero-content p { font-size: 1.5rem; max-width: 700px; margin: 0 auto 2rem; }
 
-        .btn { 
-            background: #D4A017; color: white; padding: 14px 36px; border: none; border-radius: 6px; 
-            font-size: 1.2rem; cursor: pointer; 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(183, 121, 66, 0.12), transparent 26rem),
+                linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+            color: var(--ink);
+            font-family: var(--body);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        .top-note {
+            background: var(--espresso);
+            color: var(--cream);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            padding: 0.55rem 1rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(91, 53, 36, 0.16);
+            background: rgba(255, 251, 243, 0.94);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav {
+            align-items: center;
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: auto 1fr auto;
+            margin: 0 auto;
+            max-width: 1180px;
+            min-height: 74px;
+            padding: 0 1.25rem;
+        }
+
+        .brand {
+            border: 0;
+            background: transparent;
+            color: var(--espresso);
+            display: inline-flex;
+            flex-direction: column;
+            line-height: 1;
+            min-width: 0;
+            text-align: left;
+        }
+
+        .brand-mark {
+            font-family: var(--display);
+            font-size: clamp(1.35rem, 2.2vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-sub {
+            color: var(--sage);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            align-items: center;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .nav-link,
+        .icon-button,
+        .ghost-button,
+        .primary-button,
+        .secondary-button {
+            border-radius: var(--radius);
+            min-height: 44px;
+            transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+        }
+
+        .nav-link {
+            border: 0;
+            background: transparent;
+            color: var(--coffee);
+            font-size: 0.92rem;
+            font-weight: 700;
+            padding: 0.75rem 0.9rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--mint);
+            color: var(--espresso);
+        }
+
+        .actions {
+            align-items: center;
+            display: flex;
+            gap: 0.55rem;
+            justify-content: flex-end;
+            min-width: 0;
+        }
+
+        .icon-button {
+            align-items: center;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--espresso);
+            display: inline-flex;
+            height: 44px;
+            justify-content: center;
+            min-width: 44px;
+            padding: 0 0.7rem;
+            position: relative;
+        }
+
+        .icon-button:hover {
+            border-color: var(--caramel);
+            transform: translateY(-1px);
+        }
+
+        .cart-count {
+            align-items: center;
+            background: var(--terracotta);
+            border-radius: 999px;
+            color: var(--white);
+            display: inline-flex;
+            font-size: 0.72rem;
+            font-weight: 800;
+            height: 20px;
+            justify-content: center;
+            min-width: 20px;
+            padding: 0 0.28rem;
+            position: absolute;
+            right: -0.35rem;
+            top: -0.45rem;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        main {
+            min-height: 70vh;
+        }
+
+        .page-shell {
+            margin: 0 auto;
+            max-width: 1180px;
+            padding: 3rem 1.25rem 4rem;
+        }
+
+        .hero {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+            margin: 0 auto;
+            max-width: 1180px;
+            min-height: calc(100svh - 112px);
+            padding: clamp(2rem, 5vw, 4.5rem) 1.25rem 2rem;
+        }
+
+        .hero-copy {
+            align-self: center;
+            max-width: 560px;
+            min-width: 0;
+        }
+
+        .eyebrow {
+            color: var(--sage);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--espresso);
+            font-family: var(--display);
+            line-height: 1.05;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7vw, 6.6rem);
+            letter-spacing: 0;
+            max-width: 100%;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2vw, 1.65rem);
+        }
+
+        .hero-copy p {
+            color: var(--muted);
+            font-size: clamp(1rem, 1.3vw, 1.18rem);
+            margin: 1.25rem 0 1.8rem;
+            max-width: 32rem;
+        }
+
+        .button-row {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+        }
+
+        .primary-button,
+        .secondary-button,
+        .ghost-button {
+            align-items: center;
+            display: inline-flex;
+            font-weight: 800;
+            justify-content: center;
+            padding: 0.9rem 1.1rem;
+            text-decoration: none;
+        }
+
+        .primary-button {
+            border: 1px solid var(--espresso);
+            background: var(--espresso);
+            color: var(--white);
+            min-width: 160px;
+        }
+
+        .primary-button:hover {
+            background: var(--coffee);
+            transform: translateY(-1px);
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--espresso);
+        }
+
+        .secondary-button:hover,
+        .ghost-button:hover {
+            border-color: var(--caramel);
+            transform: translateY(-1px);
+        }
+
+        .ghost-button {
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--coffee);
+        }
+
+        .hero-art {
+            align-self: center;
+            min-height: 560px;
+            min-width: 0;
+            position: relative;
+        }
+
+        .hero-photo {
+            background:
+                radial-gradient(circle at 38% 34%, rgba(255, 255, 255, 0.28), transparent 4.5rem),
+                linear-gradient(135deg, rgba(47, 33, 27, 0.2), transparent 52%),
+                linear-gradient(145deg, #80654d 0%, #3d2a23 48%, #1f1714 100%);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: min(100%, 520px);
+        }
+
+        .hero-photo::before {
+            background:
+                radial-gradient(ellipse at center, #6b3b24 0 29%, #321d14 30% 54%, transparent 55%),
+                radial-gradient(ellipse at center, #8e5534 0 28%, #3f261b 29% 53%, transparent 54%),
+                radial-gradient(ellipse at center, #5a321f 0 30%, #2f1d16 31% 55%, transparent 56%);
+            background-position: 18% 18%, 72% 38%, 44% 76%;
+            background-repeat: no-repeat;
+            background-size: 170px 112px, 210px 136px, 240px 148px;
+            content: "";
+            inset: 0;
+            opacity: 0.95;
+            position: absolute;
+            transform: rotate(-12deg) scale(1.18);
+        }
+
+        .hero-photo::after {
+            background:
+                linear-gradient(90deg, transparent, rgba(255, 251, 243, 0.36), transparent),
+                radial-gradient(circle at 50% 48%, transparent 0 92px, rgba(255, 255, 255, 0.45) 94px 100px, transparent 102px);
+            content: "";
+            inset: 0;
+            mix-blend-mode: screen;
+            opacity: 0.9;
+            position: absolute;
+        }
+
+        .hero-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            bottom: 2rem;
+            box-shadow: var(--soft-shadow);
+            left: 0;
+            max-width: 300px;
+            padding: 1rem;
+            position: absolute;
+        }
+
+        .hero-card strong {
+            color: var(--espresso);
+            display: block;
+            font-family: var(--display);
+            font-size: 1.28rem;
+            line-height: 1.1;
+            margin: 0.65rem 0 0.35rem;
+        }
+
+        .hero-card span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.88rem;
+        }
+
+        .mini-bag {
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent 45%),
+                linear-gradient(180deg, #b57942 0%, #7a492d 100%);
+            border-radius: 6px 6px 10px 10px;
+            box-shadow: inset 0 0 0 1px rgba(47, 33, 27, 0.18);
+            height: 84px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            width: 62px;
+        }
+
+        .mini-bag::before {
+            background: var(--espresso);
+            border-radius: 3px 3px 0 0;
+            content: "";
+            height: 9px;
+            left: 10px;
+            position: absolute;
+            right: 10px;
+            top: -6px;
+        }
+
+        .mini-bag::after {
+            background: var(--cream);
+            border-radius: 50%;
+            color: var(--espresso);
+            content: "";
+            height: 30px;
+            left: 16px;
+            position: absolute;
+            top: 30px;
+            width: 30px;
+        }
+
+        .home-strip {
+            border-top: 1px solid var(--line);
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin: 0 auto;
+            max-width: 1180px;
+            padding: 1.5rem 1.25rem 2.6rem;
+        }
+
+        .strip-item {
+            align-items: center;
+            display: flex;
+            gap: 0.85rem;
+        }
+
+        .strip-icon {
+            align-items: center;
+            background: var(--mint);
+            border: 1px solid rgba(102, 120, 95, 0.2);
+            border-radius: 999px;
+            color: var(--espresso);
+            display: inline-flex;
+            flex: 0 0 auto;
+            font-size: 1.15rem;
+            font-weight: 900;
+            height: 42px;
+            justify-content: center;
+            width: 42px;
+        }
+
+        .strip-item strong {
+            color: var(--espresso);
+            display: block;
+            font-size: 0.96rem;
+        }
+
+        .strip-item span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.86rem;
+        }
+
+        .page-heading {
+            align-items: end;
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            max-width: 32rem;
+        }
+
+        .toolbar {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: space-between;
+            margin-bottom: 1.4rem;
+        }
+
+        .segmented {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .segment {
+            border: 0;
+            background: transparent;
+            color: var(--coffee);
+            font-size: 0.9rem;
+            font-weight: 800;
+            min-height: 42px;
+            padding: 0.6rem 0.9rem;
+        }
+
+        .segment.active {
+            background: var(--espresso);
+            color: var(--white);
+        }
+
+        .sort-select {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--white);
+            color: var(--espresso);
+            min-height: 42px;
+            padding: 0 2.3rem 0 0.8rem;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 2rem;
+            gap: 1.1rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
         }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; }
-        .card:hover { transform: translateY(-8px); }
-        .card img { width: 100%; height: 240px; object-fit: cover; }
-        .card-content { padding: 1.5rem; text-align: center; }
-        .card h3 { color: var(--brown); margin: 10px 0; }
 
-        .detail-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 2rem;
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 18px rgba(47, 33, 27, 0.06);
             display: flex;
-            gap: 60px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            min-height: 100%;
+            overflow: hidden;
         }
-        .detail-img img { width: 100%; border-radius: 12px; }
-        .detail-info { flex: 1; min-width: 300px; }
 
-        .genai-btn {
-            background: #2C4A3A;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            width: 100%;
-            margin: 20px 0;
-            cursor: pointer;
+        .product-card:hover {
+            border-color: rgba(181, 121, 66, 0.7);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .product-visual {
+            align-items: center;
+            background:
+                linear-gradient(135deg, rgba(246, 239, 226, 0.55), rgba(215, 225, 209, 0.76)),
+                linear-gradient(180deg, var(--paper), var(--cream));
+            display: flex;
+            height: 242px;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-visual::before {
+            background:
+                radial-gradient(ellipse at center, rgba(91, 53, 36, 0.28) 0 30%, transparent 31%),
+                radial-gradient(ellipse at center, rgba(91, 53, 36, 0.18) 0 28%, transparent 29%);
+            background-position: 20% 18%, 74% 76%;
+            background-repeat: no-repeat;
+            background-size: 130px 82px, 160px 98px;
+            content: "";
+            inset: 0;
+            opacity: 0.85;
+            position: absolute;
+        }
+
+        .coffee-bag {
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 40%),
+                linear-gradient(180deg, var(--bag-top), var(--bag-bottom));
+            border-radius: 9px 9px 16px 16px;
+            box-shadow: 0 16px 24px rgba(47, 33, 27, 0.18), inset 0 0 0 1px rgba(47, 33, 27, 0.22);
+            height: 170px;
+            position: relative;
+            width: 118px;
+            z-index: 1;
+        }
+
+        .coffee-bag::before {
+            background: var(--espresso);
+            border-radius: 5px 5px 0 0;
+            content: "";
+            height: 16px;
+            left: 18px;
+            position: absolute;
+            right: 18px;
+            top: -10px;
+        }
+
+        .coffee-bag::after {
+            background: rgba(255, 251, 243, 0.92);
+            border: 1px solid rgba(47, 33, 27, 0.17);
+            border-radius: 999px;
+            content: attr(data-initial);
+            color: var(--espresso);
+            display: grid;
+            font-family: var(--display);
+            font-size: 2.3rem;
+            font-weight: 700;
+            height: 70px;
+            left: 24px;
+            line-height: 70px;
+            place-items: center;
+            position: absolute;
+            text-align: center;
+            top: 52px;
+            width: 70px;
+        }
+
+        .product-copy {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .product-meta {
+            color: var(--sage);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .product-copy p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin: 0.55rem 0 1rem;
+        }
+
+        .card-footer {
+            align-items: center;
+            display: flex;
+            gap: 0.7rem;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .price {
+            color: var(--espresso);
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+
+        .small-button {
+            border: 1px solid var(--espresso);
+            border-radius: var(--radius);
+            background: var(--espresso);
+            color: var(--white);
+            font-size: 0.86rem;
+            font-weight: 800;
+            min-height: 40px;
+            padding: 0.55rem 0.8rem;
+        }
+
+        .small-button:hover {
+            background: var(--coffee);
+        }
+
+        .detail-layout {
+            display: grid;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+        }
+
+        .detail-media {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            min-height: 620px;
+            overflow: hidden;
+            position: sticky;
+            top: 104px;
+        }
+
+        .detail-visual {
+            align-items: center;
+            background:
+                linear-gradient(180deg, rgba(246, 239, 226, 0.6), rgba(215, 225, 209, 0.85)),
+                radial-gradient(circle at 20% 20%, rgba(181, 121, 66, 0.24), transparent 18rem);
+            display: flex;
+            height: 430px;
+            justify-content: center;
+            position: relative;
+        }
+
+        .detail-visual .coffee-bag {
+            height: 270px;
+            width: 190px;
+        }
+
+        .detail-visual .coffee-bag::before {
+            height: 26px;
+            left: 30px;
+            right: 30px;
+            top: -15px;
+        }
+
+        .detail-visual .coffee-bag::after {
+            font-size: 4rem;
+            height: 112px;
+            left: 39px;
+            line-height: 112px;
+            top: 82px;
+            width: 112px;
+        }
+
+        .flavour-panel {
+            display: grid;
+            gap: 0.75rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            padding: 1rem;
+        }
+
+        .flavour-chip {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 0.85rem;
+        }
+
+        .flavour-chip span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .flavour-chip strong {
+            color: var(--espresso);
+            display: block;
+            font-size: 0.96rem;
+            margin-top: 0.25rem;
+        }
+
+        .detail-copy {
+            padding-top: 0.5rem;
+        }
+
+        .back-link {
+            align-items: center;
+            border: 0;
+            background: transparent;
+            color: var(--coffee);
+            display: inline-flex;
+            font-weight: 800;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+            min-height: 38px;
+        }
+
+        .detail-copy .price {
+            display: block;
+            font-size: 1.7rem;
+            margin: 1rem 0;
+        }
+
+        .detail-description {
+            color: var(--muted);
+            font-size: 1.04rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .option-group {
+            border-top: 1px solid var(--line);
+            padding: 1.05rem 0;
+        }
+
+        .option-title {
+            align-items: center;
+            color: var(--espresso);
+            display: flex;
+            font-weight: 900;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .option-title span {
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .choice-grid {
+            display: grid;
+            gap: 0.65rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .choice {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--white);
+            color: var(--coffee);
+            font-weight: 800;
+            min-height: 48px;
+            padding: 0.65rem;
+        }
+
+        .choice.active {
+            border-color: var(--espresso);
+            background: var(--espresso);
+            color: var(--white);
+        }
+
+        .quantity-row {
+            align-items: center;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .stepper {
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            display: inline-grid;
+            grid-template-columns: 44px 52px 44px;
+            overflow: hidden;
+        }
+
+        .stepper button {
+            border: 0;
+            background: var(--white);
+            color: var(--espresso);
+            font-size: 1.2rem;
+            font-weight: 900;
+            height: 44px;
+        }
+
+        .stepper output {
+            align-items: center;
+            background: var(--paper);
+            color: var(--espresso);
+            display: flex;
+            font-weight: 900;
+            height: 44px;
+            justify-content: center;
+        }
+
+        .detail-actions {
+            display: grid;
+            gap: 0.75rem;
+            margin: 1.1rem 0;
+        }
+
+        .brew-card {
+            background: var(--mint);
+            border: 1px solid rgba(102, 120, 95, 0.24);
+            border-radius: var(--radius);
+            color: var(--espresso);
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+
+        .brew-card strong {
+            display: block;
+            font-family: var(--display);
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .brew-card p {
+            color: #45503f;
+            font-size: 0.92rem;
+        }
+
+        .cart-layout {
+            display: grid;
+            gap: 1.4rem;
+            grid-template-columns: minmax(0, 1fr) 360px;
+        }
+
+        .cart-list,
+        .summary-card,
+        .checkout-card,
+        .confirmation-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 18px rgba(47, 33, 27, 0.06);
+        }
+
+        .cart-list {
+            min-height: 280px;
+            padding: 0.4rem 1rem;
+        }
+
+        .cart-item {
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 84px 1fr auto;
+            padding: 1rem 0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: 0;
+        }
+
+        .cart-thumb {
+            align-items: center;
+            background: var(--cream);
+            border-radius: var(--radius);
+            display: flex;
+            height: 84px;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cart-thumb .coffee-bag {
+            height: 62px;
+            width: 44px;
+        }
+
+        .cart-thumb .coffee-bag::before {
+            height: 6px;
+            left: 8px;
+            right: 8px;
+            top: -3px;
+        }
+
+        .cart-thumb .coffee-bag::after {
             font-size: 1.1rem;
+            height: 24px;
+            left: 10px;
+            line-height: 24px;
+            top: 21px;
+            width: 24px;
+        }
+
+        .cart-item h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .cart-controls {
+            align-items: end;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .cart-controls .stepper {
+            grid-template-columns: 36px 42px 36px;
+        }
+
+        .cart-controls .stepper button,
+        .cart-controls .stepper output {
+            height: 36px;
+        }
+
+        .remove-button {
+            border: 0;
+            background: transparent;
+            color: var(--terracotta);
+            font-size: 0.82rem;
+            font-weight: 800;
+            min-height: 32px;
+        }
+
+        .empty-cart {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 260px;
+            text-align: center;
+        }
+
+        .empty-cart p {
+            color: var(--muted);
+            margin: 0.65rem 0 1rem;
+        }
+
+        .summary-card,
+        .checkout-card {
+            padding: 1.1rem;
+        }
+
+        .summary-row {
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+        }
+
+        .summary-row.total {
+            border-bottom: 0;
+            color: var(--espresso);
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .progress {
+            background: var(--cream);
+            border-radius: 999px;
+            height: 9px;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+
+        .progress span {
+            background: var(--sage);
+            display: block;
+            height: 100%;
+            width: var(--progress);
+        }
+
+        .checkout-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 1rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: var(--espresso);
+            font-size: 0.84rem;
+            font-weight: 900;
+        }
+
+        .field input {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            min-height: 46px;
+            padding: 0 0.8rem;
+        }
+
+        .confirmation-card {
+            margin: 0 auto;
+            max-width: 760px;
+            padding: clamp(1.5rem, 5vw, 3rem);
+            text-align: center;
+        }
+
+        .confirmation-mark {
+            align-items: center;
+            background: var(--mint);
+            border-radius: 999px;
+            color: var(--espresso);
+            display: inline-flex;
+            font-size: 2rem;
+            font-weight: 900;
+            height: 78px;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            width: 78px;
+        }
+
+        .confirmation-card p {
+            color: var(--muted);
+            margin: 1rem auto;
+            max-width: 34rem;
+        }
+
+        .order-number {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            color: var(--espresso);
+            display: inline-flex;
+            font-weight: 900;
+            margin: 0.5rem 0 1.5rem;
+            padding: 0.75rem 1rem;
         }
 
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            z-index: 2000;
             align-items: center;
+            background: rgba(35, 31, 32, 0.55);
+            display: none;
+            inset: 0;
             justify-content: center;
-        }
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
+            padding: 1rem;
+            position: fixed;
+            z-index: 100;
         }
 
-        /* Shopping Cart & Confirmation */
-        .cart-container, .confirmation {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 2rem;
+        .modal.active {
+            display: flex;
         }
-        .footer {
-            background: var(--brown);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 60px;
+
+        .modal-content {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 540px;
+            padding: 1.25rem;
+            width: min(100%, 540px);
+        }
+
+        .modal-header {
+            align-items: start;
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body {
+            color: var(--muted);
+        }
+
+        .modal-body ul {
+            margin: 0.75rem 0 0 1.1rem;
+        }
+
+        .toast {
+            background: var(--espresso);
+            border-radius: var(--radius);
+            bottom: 1rem;
+            box-shadow: var(--soft-shadow);
+            color: var(--white);
+            left: 50%;
+            opacity: 0;
+            padding: 0.8rem 1rem;
+            pointer-events: none;
+            position: fixed;
+            transform: translate(-50%, 18px);
+            transition: opacity 180ms ease, transform 180ms ease;
+            z-index: 120;
+        }
+
+        .toast.visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .site-footer {
+            background: var(--espresso);
+            color: var(--cream);
+            margin-top: 2rem;
+            padding: 2rem 1.25rem;
+        }
+
+        .footer-inner {
+            align-items: center;
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 1180px;
+        }
+
+        .footer-inner p {
+            color: rgba(246, 239, 226, 0.76);
+            font-size: 0.9rem;
+        }
+
+        .palette {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .swatch {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            height: 22px;
+            width: 22px;
+        }
+
+        @media (max-width: 980px) {
+            .nav {
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+
+            .brand {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .actions {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .nav-links {
+                background: var(--paper);
+                border-top: 1px solid var(--line);
+                grid-column: 1 / -1;
+                grid-row: 2;
+                justify-content: flex-start;
+                margin: 0 -1.25rem;
+                max-width: calc(100% + 2.5rem);
+                overflow-x: auto;
+                padding: 0.55rem 1rem;
+            }
+
+            .nav-link {
+                white-space: nowrap;
+            }
+
+            .hero,
+            .detail-layout,
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-art {
+                min-height: 430px;
+            }
+
+            .hero-photo {
+                width: 100%;
+            }
+
+            .detail-media {
+                min-height: auto;
+                position: static;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .top-note {
+                font-size: 0.68rem;
+                letter-spacing: 0.04em;
+                line-height: 1.35;
+                padding: 0.45rem 0.7rem;
+                white-space: normal;
+            }
+
+            .nav {
+                min-height: 64px;
+                padding: 0 0.9rem;
+                position: relative;
+            }
+
+            .actions {
+                position: fixed;
+                right: 0.9rem;
+                top: 38px;
+                z-index: 80;
+            }
+
+            .brand-mark {
+                font-size: 1.26rem;
+            }
+
+            .brand-sub {
+                font-size: 0.55rem;
+                max-width: 190px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 0.45rem;
+                margin: 0 -0.9rem;
+                max-width: none;
+                overflow-x: visible;
+                padding: 0.55rem 0.9rem;
+            }
+
+            .nav-link {
+                flex: 1 1 calc(50% - 0.45rem);
+                text-align: center;
+            }
+
+            .hero {
+                padding: 2rem 0.9rem 1.5rem;
+            }
+
+            h1 {
+                font-size: clamp(2.55rem, 14.5vw, 3.55rem);
+                overflow-wrap: normal;
+            }
+
+            .hero-copy p {
+                font-size: 1rem;
+            }
+
+            .button-row,
+            .detail-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .primary-button,
+            .secondary-button,
+            .ghost-button {
+                width: 100%;
+            }
+
+            .hero-art {
+                min-height: 360px;
+                overflow: hidden;
+            }
+
+            .hero-card {
+                bottom: 1rem;
+                max-width: 250px;
+                padding: 0.85rem;
+            }
+
+            .home-strip {
+                grid-template-columns: 1fr;
+                padding: 1.3rem 0.9rem 2rem;
+            }
+
+            .page-shell {
+                padding: 2rem 0.9rem 3rem;
+                overflow: hidden;
+            }
+
+            .page-heading,
+            .toolbar,
+            .footer-inner {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .segmented {
+                width: 100%;
+            }
+
+            .segment {
+                flex: 1;
+                padding-left: 0.45rem;
+                padding-right: 0.45rem;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-visual {
+                height: 230px;
+            }
+
+            .detail-visual {
+                height: 360px;
+            }
+
+            .flavour-panel,
+            .choice-grid,
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item {
+                align-items: start;
+                grid-template-columns: 74px 1fr;
+            }
+
+            .cart-controls {
+                align-items: stretch;
+                flex-direction: row;
+                grid-column: 1 / -1;
+                justify-content: space-between;
+            }
+
+            .checkout-card {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="top-note" id="shipping-note">Free Melbourne metro shipping over $60.</div>
 
-    <div class="shipping-bar">YOU'RE $15.00 AWAY FROM FREE SHIPPING</div>
+    <header class="site-header">
+        <nav class="nav" aria-label="Main navigation">
+            <button class="brand" type="button" data-view-target="home" aria-label="Go to homepage">
+                <span class="brand-mark">MCRC</span>
+                <span class="brand-sub">Melbourne Coffee Roasting Co.</span>
+            </button>
 
-    <header>
-        <nav>
-            <div class="logo">MELBOURNE COFFEE ROASTING CO.</div>
-            <div onclick="showCart()" style="cursor:pointer; font-size:1.4rem;">🛒 <span id="cart-count">0</span></div>
+            <div class="nav-links" aria-label="Page links">
+                <button class="nav-link active" type="button" data-view-target="home">Home</button>
+                <button class="nav-link" type="button" data-view-target="products">Coffee Beans</button>
+                <button class="nav-link" type="button" data-view-target="products" data-filter-jump="single-origin">Single Origin</button>
+                <button class="nav-link" type="button" data-view-target="products" data-filter-jump="blend">Blends</button>
+            </div>
+
+            <div class="actions">
+                <button class="icon-button" type="button" data-view-target="cart" aria-label="Open cart">
+                    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 6h15l-1.6 8.2a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L5.7 4.8H3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="9" cy="20" r="1.4" fill="currentColor"/>
+                        <circle cx="18" cy="20" r="1.4" fill="currentColor"/>
+                    </svg>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <!-- Home Page -->
-    <section id="home" class="section active">
-        <div class="hero">
-            <div class="hero-content">
-                <h1>Melbourne's Finest Artisan Coffee</h1>
-                <p>Freshly roasted • Ethically sourced • Brewed at home</p>
-                <button class="btn" onclick="goToProductList()">SHOP OUR BEANS</button>
-            </div>
-        </div>
-    </section>
+    <main>
+        <section class="view active" id="home" aria-labelledby="home-title">
+            <div class="hero">
+                <div class="hero-copy">
+                    <p class="eyebrow">Small batch roasted in Melbourne</p>
+                    <h1 id="home-title">Fresh beans for slow mornings.</h1>
+                    <p>Choose freshly roasted blends and single origins designed for home espresso, filter, and moka pot brewing.</p>
+                    <div class="button-row">
+                        <button class="primary-button" type="button" data-view-target="products">Shop beans</button>
+                        <button class="secondary-button" type="button" data-featured-product="0">View signature blend</button>
+                    </div>
+                </div>
 
-    <!-- Product List -->
-    <section id="product-list" class="section">
-        <h2 style="text-align:center; margin:60px 0 40px;">Whole Bean Coffee</h2>
-        <div class="product-grid">
-            <div class="card" onclick="viewProduct(0)"><img src="https://picsum.photos/id/201/800/600" alt=""><div class="card-content"><h3>Fed Square Blend</h3><p>$28.00</p></div></div>
-            <div class="card" onclick="viewProduct(1)"><img src="https://picsum.photos/id/237/800/600" alt=""><div class="card-content"><h3>Yirgacheffe Highlands</h3><p>$28.00</p></div></div>
-            <div class="card" onclick="viewProduct(2)"><img src="https://picsum.photos/id/292/800/600" alt=""><div class="card-content"><h3>Panama Geisha</h3><p>$42.00</p></div></div>
-            <div class="card" onclick="viewProduct(3)"><img src="https://picsum.photos/id/1015/800/600" alt=""><div class="card-content"><h3>Dockside Blend</h3><p>$24.00</p></div></div>
-        </div>
-    </section>
-
-    <!-- Product Detail -->
-    <section id="product-detail" class="section">
-        <div class="detail-container">
-            <div class="detail-img">
-                <img id="detail-image" src="" alt="">
+                <div class="hero-art" aria-hidden="true">
+                    <div class="hero-photo"></div>
+                    <div class="hero-card">
+                        <div class="mini-bag"></div>
+                        <strong>Fed Square Blend</strong>
+                        <span>Chocolate, almond, golden crema. Roasted this week.</span>
+                    </div>
+                </div>
             </div>
-            <div class="detail-info">
-                <h1 id="detail-name"></h1>
-                <p id="detail-price" style="font-size:1.8rem; color:var(--brown);"></p>
-                <p id="detail-desc"></p>
-                <button class="btn" onclick="addToCart()" style="width:100%; margin:20px 0;">ADD TO CART</button>
-                <button class="genai-btn" onclick="showGenAI()">✨ GenAI Brew Assistant</button>
-                <button onclick="goToProductList()" style="margin-top:15px; background:none; border:2px solid #4A2F1F; color:#4A2F1F; width:100%; padding:12px;">← Back to Shop</button>
-            </div>
-        </div>
-    </section>
 
-    <!-- GenAI Modal -->
-    <div id="genai-modal" class="modal">
+            <div class="home-strip" aria-label="Store benefits">
+                <div class="strip-item">
+                    <span class="strip-icon">1</span>
+                    <div>
+                        <strong>Roasted weekly</strong>
+                        <span>Fresh batches packed close to roast day.</span>
+                    </div>
+                </div>
+                <div class="strip-item">
+                    <span class="strip-icon">2</span>
+                    <div>
+                        <strong>Local delivery</strong>
+                        <span>Free Melbourne metro shipping over $60.</span>
+                    </div>
+                </div>
+                <div class="strip-item">
+                    <span class="strip-icon">3</span>
+                    <div>
+                        <strong>Responsive screens</strong>
+                        <span>Mobile first layouts with desktop refinements.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="view" id="products" aria-labelledby="products-title">
+            <div class="page-shell">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">Whole bean coffee</p>
+                        <h2 id="products-title">Select your roast.</h2>
+                    </div>
+                    <p>Browse blends and single origins inspired by the Figma product list screen, then open a detail page or add directly to cart.</p>
+                </div>
+
+                <div class="toolbar">
+                    <div class="segmented" role="group" aria-label="Product filter">
+                        <button class="segment active" type="button" data-filter="all">All</button>
+                        <button class="segment" type="button" data-filter="blend">Blends</button>
+                        <button class="segment" type="button" data-filter="single-origin">Single Origin</button>
+                    </div>
+                    <select class="sort-select" id="sort-select" aria-label="Sort products">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: low to high</option>
+                        <option value="price-high">Price: high to low</option>
+                    </select>
+                </div>
+
+                <div class="product-grid" id="product-grid"></div>
+            </div>
+        </section>
+
+        <section class="view" id="detail" aria-labelledby="detail-title">
+            <div class="page-shell">
+                <div class="detail-layout">
+                    <aside class="detail-media">
+                        <div class="detail-visual" id="detail-visual"></div>
+                        <div class="flavour-panel" id="flavour-panel"></div>
+                    </aside>
+
+                    <article class="detail-copy">
+                        <button class="back-link" type="button" data-view-target="products">Back to product list</button>
+                        <p class="eyebrow" id="detail-category">Coffee</p>
+                        <h2 id="detail-title">Product title</h2>
+                        <span class="price" id="detail-price">$0.00</span>
+                        <p class="detail-description" id="detail-description"></p>
+
+                        <div class="option-group">
+                            <div class="option-title">Grind <span>Whole bean recommended</span></div>
+                            <div class="choice-grid" id="grind-options">
+                                <button class="choice active" type="button" data-grind="Whole bean">Whole bean</button>
+                                <button class="choice" type="button" data-grind="Espresso">Espresso</button>
+                                <button class="choice" type="button" data-grind="Filter">Filter</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <div class="option-title">Bag size <span>Reusable pouch</span></div>
+                            <div class="choice-grid" id="size-options">
+                                <button class="choice active" type="button" data-size="250g" data-price-modifier="0">250g</button>
+                                <button class="choice" type="button" data-size="500g" data-price-modifier="18">500g</button>
+                                <button class="choice" type="button" data-size="1kg" data-price-modifier="46">1kg</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <div class="option-title">Quantity</div>
+                            <div class="quantity-row">
+                                <div class="stepper" aria-label="Quantity selector">
+                                    <button type="button" data-detail-quantity="-1" aria-label="Decrease quantity">-</button>
+                                    <output id="detail-quantity">1</output>
+                                    <button type="button" data-detail-quantity="1" aria-label="Increase quantity">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="primary-button" type="button" id="add-to-cart">Add to cart</button>
+                            <button class="secondary-button" type="button" id="brew-guide-button">Open brew guide</button>
+                        </div>
+
+                        <div class="brew-card">
+                            <strong>Roaster's note</strong>
+                            <p>Choose whole beans for the freshest cup, or select a grind that matches your home setup.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="view" id="cart" aria-labelledby="cart-title">
+            <div class="page-shell">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">Shopping cart</p>
+                        <h2 id="cart-title">Review your order.</h2>
+                    </div>
+                    <p id="cart-helper">Adjust quantities before moving to the confirmation screen.</p>
+                </div>
+
+                <div class="cart-layout">
+                    <div class="cart-list" id="cart-list"></div>
+                    <aside class="summary-card" aria-label="Order summary">
+                        <h3>Order summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <strong id="subtotal">$0.00</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <strong id="shipping">$8.00</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Free shipping progress</span>
+                            <strong id="free-shipping-text">$60</strong>
+                        </div>
+                        <div class="progress" aria-hidden="true"><span id="free-progress"></span></div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="order-total">$0.00</span>
+                        </div>
+                        <button class="primary-button" type="button" id="checkout-button">Checkout</button>
+                        <button class="ghost-button" type="button" data-view-target="products">Continue shopping</button>
+                    </aside>
+                </div>
+
+                <div class="checkout-card" aria-label="Checkout details">
+                    <h3>Checkout details</h3>
+                    <div class="checkout-grid">
+                        <div class="field">
+                            <label for="first-name">First name</label>
+                            <input id="first-name" value="Alex">
+                        </div>
+                        <div class="field">
+                            <label for="last-name">Last name</label>
+                            <input id="last-name" value="Taylor">
+                        </div>
+                        <div class="field full">
+                            <label for="email">Email</label>
+                            <input id="email" value="student@example.com">
+                        </div>
+                        <div class="field full">
+                            <label for="address">Delivery address</label>
+                            <input id="address" value="Parkville, Melbourne VIC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="view" id="confirmation" aria-labelledby="confirmation-title">
+            <div class="page-shell">
+                <article class="confirmation-card">
+                    <div class="confirmation-mark">OK</div>
+                    <p class="eyebrow">Order confirmed</p>
+                    <h2 id="confirmation-title">Your coffee is on the way.</h2>
+                    <p>Thanks for ordering from Melbourne Coffee Roasting Co. Your roast will be packed carefully before delivery.</p>
+                    <div class="order-number" id="order-number">Order MCRC-0000</div>
+                    <div class="button-row" style="justify-content:center;">
+                        <button class="primary-button" type="button" data-view-target="products">Shop again</button>
+                        <button class="secondary-button" type="button" data-view-target="home">Back home</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="brew-modal" role="dialog" aria-modal="true" aria-labelledby="brew-modal-title">
         <div class="modal-content">
-            <h2>GenAI Brew Assistant</h2>
-            <div id="genai-result" style="margin:20px 0; line-height:1.7;"></div>
-            <button onclick="closeGenAI()" style="padding:12px 30px;">Close</button>
+            <div class="modal-header">
+                <h3 id="brew-modal-title">Brew guide</h3>
+                <button class="icon-button" type="button" id="close-modal" aria-label="Close brew guide">
+                    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="brew-modal-body"></div>
         </div>
     </div>
 
-    <!-- Shopping Cart -->
-    <section id="shopping-cart" class="section">
-        <div class="cart-container">
-            <div class="cart-items" id="cart-items"></div>
-            <div class="order-summary">
-                <h3>Order Summary</h3>
-                <div style="display:flex; justify-content:space-between; margin:15px 0;"><span>Subtotal</span><span>$<span id="subtotal">0</span></span></div>
-                <div style="display:flex; justify-content:space-between; margin:15px 0;"><span>Shipping</span><span style="color:green;">Calculated at checkout</span></div>
-                <hr>
-                <div style="display:flex; justify-content:space-between; font-size:1.3rem; margin-top:15px;"><strong>Total</strong><strong>$<span id="total">0</span></strong></div>
-                <button onclick="checkout()" class="btn" style="width:100%; margin-top:30px;">PROCEED TO CHECKOUT</button>
-                <button onclick="goToProductList()" style="width:100%; margin-top:10px; background:none; border:2px solid #4A2F1F; color:#4A2F1F;">Continue Shopping</button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>Melbourne Coffee Roasting Co.</strong>
+                <p>Freshly roasted coffee for Melbourne homes.</p>
+            </div>
+            <div class="palette" aria-label="Selected design colours">
+                <span class="swatch" style="background:#2f211b"></span>
+                <span class="swatch" style="background:#b57942"></span>
+                <span class="swatch" style="background:#66785f"></span>
+                <span class="swatch" style="background:#f6efe2"></span>
             </div>
         </div>
-    </section>
-
-    <!-- Confirmation Page -->
-    <section id="confirmation" class="section">
-        <div class="confirmation" style="text-align:center; padding:80px 20px;">
-            <h1 style="color:var(--brown); margin-bottom:20px;">Thank you for your order!</h1>
-            <p>Your order has been received and is being prepared.</p>
-            <p style="margin:30px 0; font-size:1.2rem;">Order #MC-20260522-7842</p>
-            <button onclick="goToProductList()" class="btn">Back to Shop</button>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p><strong>Melbourne Coffee Roasting Co.</strong> — INFO20005 Assessment 3</p>
     </footer>
 
     <script>
-        let cart = [];
-
         const products = [
-            { id: 0, name: "Fed Square Blend", price: 28, img: "https://picsum.photos/id/201/800/600", desc: "Rich, full-bodied with notes of chocolate and toasted almond." },
-            { id: 1, name: "Yirgacheffe Highlands", price: 28, img: "https://picsum.photos/id/237/800/600", desc: "Floral and bright with jasmine, bergamot and peach notes." },
-            { id: 2, name: "Panama Geisha", price: 42, img: "https://picsum.photos/id/292/800/600", desc: "Exquisite jasmine aroma with citrus complexity." },
-            { id: 3, name: "Dockside Blend", price: 24, img: "https://picsum.photos/id/1015/800/600", desc: "Toasted oak, molasses, and spice." }
+            {
+                id: 0,
+                name: "Fed Square Blend",
+                category: "blend",
+                price: 28,
+                roast: "Medium",
+                initial: "F",
+                bagTop: "#c3824b",
+                bagBottom: "#7a492d",
+                notes: ["Chocolate", "Almond", "Caramel"],
+                short: "A balanced espresso blend with chocolate sweetness and a round, creamy finish.",
+                description: "Inspired by Melbourne's city centre, this blend is designed for everyday espresso. It tastes rich with milk and stays sweet as a long black.",
+                brew: ["Dose 18g for espresso.", "Yield 36g in 27-30 seconds.", "Use 94 degrees Celsius water for filter brewing."]
+            },
+            {
+                id: 1,
+                name: "Yarra Morning",
+                category: "single-origin",
+                price: 32,
+                roast: "Light",
+                initial: "Y",
+                bagTop: "#758a68",
+                bagBottom: "#43523d",
+                notes: ["Jasmine", "Peach", "Citrus"],
+                short: "A bright single origin with floral aroma and a clean citrus finish.",
+                description: "This product detail screen gives the lighter coffee its own mood: softer colour, clear tasting notes, and a brew guide for filter drinkers.",
+                brew: ["Use 15g coffee to 250g water.", "Grind medium-fine for pour over.", "Aim for a 2:45 total brew time."]
+            },
+            {
+                id: 2,
+                name: "Dockside Decaf",
+                category: "blend",
+                price: 26,
+                roast: "Medium-dark",
+                initial: "D",
+                bagTop: "#98664c",
+                bagBottom: "#4c3128",
+                notes: ["Cocoa", "Raisin", "Spice"],
+                short: "A smooth decaf for late nights, moka pots, and milk drinks.",
+                description: "A calm, lower-caffeine option that still carries the body and cocoa notes expected from a Melbourne blend.",
+                brew: ["Dose 19g for espresso.", "Yield 38g in 30 seconds.", "Pairs well with oat milk."]
+            },
+            {
+                id: 3,
+                name: "Carlton Filter Roast",
+                category: "single-origin",
+                price: 30,
+                roast: "Light-medium",
+                initial: "C",
+                bagTop: "#bc684b",
+                bagBottom: "#743e2d",
+                notes: ["Red apple", "Honey", "Tea"],
+                short: "A soft filter roast with honey sweetness and a tea-like finish.",
+                description: "Made for slow mornings and clean paper-filter brews, with a profile that stays delicate, sweet, and easy to drink.",
+                brew: ["Use 16g coffee to 260g water.", "Bloom for 35 seconds.", "Finish pouring by 1:55."]
+            }
         ];
 
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+        const state = {
+            cart: [],
+            currentProductId: 0,
+            filter: "all",
+            sort: "featured",
+            detailQuantity: 1,
+            selectedGrind: "Whole bean",
+            selectedSize: "250g",
+            selectedPriceModifier: 0
+        };
+
+        const views = document.querySelectorAll(".view");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const productGrid = document.getElementById("product-grid");
+        const cartList = document.getElementById("cart-list");
+        const toast = document.getElementById("toast");
+
+        function formatCurrency(value) {
+            return "$" + value.toFixed(2);
         }
 
-        function goToProductList() { showSection('product-list'); }
-        function viewProduct(id) {
-            const p = products[id];
-            document.getElementById('detail-name').textContent = p.name;
-            document.getElementById('detail-price').textContent = '$' + p.price + '.00';
-            document.getElementById('detail-image').src = p.img;
-            document.getElementById('detail-desc').textContent = p.desc;
-            showSection('product-detail');
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("visible");
+            window.clearTimeout(showToast.timer);
+            showToast.timer = window.setTimeout(() => toast.classList.remove("visible"), 1900);
         }
 
-        function addToCart() {
-            const name = document.getElementById('detail-name').textContent;
-            const price = parseFloat(document.getElementById('detail-price').textContent.replace('$',''));
-            cart.push({name, price, quantity: 1});
-            updateCartCount();
-            alert(name + " added to cart!");
+        function showView(id) {
+            views.forEach(view => view.classList.toggle("active", view.id === id));
+            navLinks.forEach(link => {
+                const isProductArea = id === "products" || id === "detail";
+                const isProductLink = link.dataset.viewTarget === "products";
+                const filterTarget = link.dataset.filterJump;
+                const activeProductLink = isProductArea && isProductLink && ((state.filter === "all" && !filterTarget) || filterTarget === state.filter);
+                link.classList.toggle("active", link.dataset.viewTarget === id || activeProductLink);
+            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (id === "cart") renderCart();
         }
 
-        function updateCartCount() {
-            document.getElementById('cart-count').textContent = cart.length;
+        function getVisibleProducts() {
+            let visible = products.filter(product => state.filter === "all" || product.category === state.filter);
+            if (state.sort === "price-low") visible = visible.slice().sort((a, b) => a.price - b.price);
+            if (state.sort === "price-high") visible = visible.slice().sort((a, b) => b.price - a.price);
+            return visible;
         }
 
-        function showCart() {
-            showSection('shopping-cart');
-            renderCart();
+        function bagMarkup(product) {
+            return `<div class="coffee-bag" data-initial="${product.initial}" style="--bag-top:${product.bagTop};--bag-bottom:${product.bagBottom};"></div>`;
+        }
+
+        function renderProducts() {
+            productGrid.innerHTML = getVisibleProducts().map(product => `
+                <article class="product-card">
+                    <button class="product-visual" type="button" data-product-id="${product.id}" aria-label="Open ${product.name}">
+                        ${bagMarkup(product)}
+                    </button>
+                    <div class="product-copy">
+                        <div class="product-meta">${product.category.replace("-", " ")} / ${product.roast}</div>
+                        <h3>${product.name}</h3>
+                        <p>${product.short}</p>
+                        <div class="card-footer">
+                            <span class="price">${formatCurrency(product.price)}</span>
+                            <button class="small-button" type="button" data-quick-add="${product.id}">Add</button>
+                        </div>
+                    </div>
+                </article>
+            `).join("");
+        }
+
+        function openProduct(id) {
+            const product = products.find(item => item.id === Number(id));
+            if (!product) return;
+            state.currentProductId = product.id;
+            state.detailQuantity = 1;
+            state.selectedGrind = "Whole bean";
+            state.selectedSize = "250g";
+            state.selectedPriceModifier = 0;
+
+            document.getElementById("detail-category").textContent = product.category.replace("-", " ") + " / " + product.roast + " roast";
+            document.getElementById("detail-title").textContent = product.name;
+            document.getElementById("detail-description").textContent = product.description;
+            document.getElementById("detail-visual").innerHTML = bagMarkup(product);
+            document.getElementById("flavour-panel").innerHTML = product.notes.map((note, index) => `
+                <div class="flavour-chip">
+                    <span>Note ${index + 1}</span>
+                    <strong>${note}</strong>
+                </div>
+            `).join("");
+
+            document.querySelectorAll("#grind-options .choice").forEach((choice, index) => choice.classList.toggle("active", index === 0));
+            document.querySelectorAll("#size-options .choice").forEach((choice, index) => choice.classList.toggle("active", index === 0));
+            updateDetailPrice();
+            showView("detail");
+        }
+
+        function updateDetailPrice() {
+            const product = products.find(item => item.id === state.currentProductId);
+            const unitPrice = product.price + state.selectedPriceModifier;
+            document.getElementById("detail-price").textContent = formatCurrency(unitPrice);
+            document.getElementById("detail-quantity").textContent = state.detailQuantity;
+            document.getElementById("add-to-cart").textContent = `Add to cart - ${formatCurrency(unitPrice * state.detailQuantity)}`;
+        }
+
+        function addToCart(productId, options = {}) {
+            const product = products.find(item => item.id === Number(productId));
+            if (!product) return;
+            const item = {
+                key: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+                id: product.id,
+                name: product.name,
+                price: product.price + (options.priceModifier || 0),
+                quantity: options.quantity || 1,
+                grind: options.grind || "Whole bean",
+                size: options.size || "250g"
+            };
+            state.cart.push(item);
+            updateCartBadge();
+            updateShippingNote();
+            showToast(item.name + " added to cart.");
+        }
+
+        function updateCartBadge() {
+            const count = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("cart-count").textContent = count;
+        }
+
+        function cartSubtotal() {
+            return state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        }
+
+        function updateShippingNote() {
+            const subtotal = cartSubtotal();
+            const remaining = Math.max(0, 60 - subtotal);
+            const note = document.getElementById("shipping-note");
+            if (remaining === 0) {
+                note.textContent = "Free Melbourne metro shipping unlocked.";
+            } else {
+                note.textContent = "Free shipping: " + formatCurrency(remaining) + " to go.";
+            }
         }
 
         function renderCart() {
-            let html = '';
-            let subtotal = 0;
-            cart.forEach((item, i) => {
-                const total = item.price * (item.quantity || 1);
-                subtotal += total;
-                html += `<div class="cart-item">... (same as previous version) ...</div>`;
-            });
-            // 简化版渲染（可根据需要继续扩展）
-            document.getElementById('cart-items').innerHTML = html || '<p>Your cart is empty.</p>';
-            document.getElementById('subtotal').textContent = subtotal;
-            document.getElementById('total').textContent = subtotal;
+            if (state.cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>Your cart is empty.</h3>
+                        <p>Add a bag of coffee to test the full checkout flow.</p>
+                        <button class="primary-button" type="button" data-view-target="products">Browse coffee</button>
+                    </div>
+                `;
+            } else {
+                cartList.innerHTML = state.cart.map(item => {
+                    const product = products.find(productItem => productItem.id === item.id);
+                    return `
+                        <article class="cart-item">
+                            <div class="cart-thumb">${bagMarkup(product)}</div>
+                            <div>
+                                <h3>${item.name}</h3>
+                                <p>${item.size} / ${item.grind}</p>
+                                <p>${formatCurrency(item.price)} each</p>
+                            </div>
+                            <div class="cart-controls">
+                                <strong>${formatCurrency(item.price * item.quantity)}</strong>
+                                <div class="stepper" aria-label="Quantity for ${item.name}">
+                                    <button type="button" data-cart-step="${item.key}" data-step="-1" aria-label="Decrease quantity">-</button>
+                                    <output>${item.quantity}</output>
+                                    <button type="button" data-cart-step="${item.key}" data-step="1" aria-label="Increase quantity">+</button>
+                                </div>
+                                <button class="remove-button" type="button" data-remove-item="${item.key}">Remove</button>
+                            </div>
+                        </article>
+                    `;
+                }).join("");
+            }
+
+            const subtotal = cartSubtotal();
+            const shipping = subtotal === 0 || subtotal >= 60 ? 0 : 8;
+            const progress = Math.min(100, (subtotal / 60) * 100);
+            document.getElementById("subtotal").textContent = formatCurrency(subtotal);
+            document.getElementById("shipping").textContent = shipping === 0 ? "Free" : formatCurrency(shipping);
+            document.getElementById("free-shipping-text").textContent = subtotal >= 60 ? "Unlocked" : formatCurrency(60 - subtotal) + " left";
+            document.getElementById("free-progress").style.setProperty("--progress", progress + "%");
+            document.getElementById("order-total").textContent = formatCurrency(subtotal + shipping);
+            document.getElementById("checkout-button").disabled = state.cart.length === 0;
+            updateShippingNote();
         }
 
         function checkout() {
-            showSection('confirmation');
-            cart = [];
-            updateCartCount();
+            if (state.cart.length === 0) {
+                showToast("Add coffee before checkout.");
+                return;
+            }
+            const orderId = "MCRC-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+            document.getElementById("order-number").textContent = "Order " + orderId;
+            state.cart = [];
+            updateCartBadge();
+            updateShippingNote();
+            showView("confirmation");
         }
 
-        function showGenAI() {
-            const modal = document.getElementById('genai-modal');
-            const result = document.getElementById('genai-result');
-            result.innerHTML = `<strong>Personalized Recommendation:</strong><br><br>For this blend, we recommend a 1:2 espresso ratio.<br>Pull a 36g shot from an 18g dose in ~28 seconds.<br><br>Perfect pairings: Almond croissant or dark chocolate tart.`;
-            modal.style.display = 'flex';
+        function openBrewGuide() {
+            const product = products.find(item => item.id === state.currentProductId);
+            document.getElementById("brew-modal-title").textContent = product.name + " brew guide";
+            document.getElementById("brew-modal-body").innerHTML = `
+                <p>Use these brew notes as a starting point, then adjust grind size and water temperature to taste.</p>
+                <ul>${product.brew.map(step => `<li>${step}</li>`).join("")}</ul>
+            `;
+            document.getElementById("brew-modal").classList.add("active");
         }
 
-        function closeGenAI() {
-            document.getElementById('genai-modal').style.display = 'none';
-        }
+        document.addEventListener("click", event => {
+            const viewButton = event.target.closest("[data-view-target]");
+            if (viewButton) {
+                const filterJump = viewButton.dataset.filterJump;
+                if (filterJump) {
+                    state.filter = filterJump;
+                    document.querySelectorAll(".segment").forEach(segment => segment.classList.toggle("active", segment.dataset.filter === filterJump));
+                    renderProducts();
+                }
+                showView(viewButton.dataset.viewTarget);
+            }
+
+            const featured = event.target.closest("[data-featured-product]");
+            if (featured) openProduct(featured.dataset.featuredProduct);
+
+            const productButton = event.target.closest("[data-product-id]");
+            if (productButton) openProduct(productButton.dataset.productId);
+
+            const quickAdd = event.target.closest("[data-quick-add]");
+            if (quickAdd) addToCart(quickAdd.dataset.quickAdd);
+
+            const filter = event.target.closest("[data-filter]");
+            if (filter) {
+                state.filter = filter.dataset.filter;
+                document.querySelectorAll(".segment").forEach(segment => segment.classList.toggle("active", segment === filter));
+                renderProducts();
+            }
+
+            const grindChoice = event.target.closest("[data-grind]");
+            if (grindChoice) {
+                state.selectedGrind = grindChoice.dataset.grind;
+                document.querySelectorAll("#grind-options .choice").forEach(choice => choice.classList.toggle("active", choice === grindChoice));
+            }
+
+            const sizeChoice = event.target.closest("[data-size]");
+            if (sizeChoice) {
+                state.selectedSize = sizeChoice.dataset.size;
+                state.selectedPriceModifier = Number(sizeChoice.dataset.priceModifier);
+                document.querySelectorAll("#size-options .choice").forEach(choice => choice.classList.toggle("active", choice === sizeChoice));
+                updateDetailPrice();
+            }
+
+            const detailQuantity = event.target.closest("[data-detail-quantity]");
+            if (detailQuantity) {
+                state.detailQuantity = Math.max(1, state.detailQuantity + Number(detailQuantity.dataset.detailQuantity));
+                updateDetailPrice();
+            }
+
+            const cartStep = event.target.closest("[data-cart-step]");
+            if (cartStep) {
+                const item = state.cart.find(cartItem => cartItem.key === cartStep.dataset.cartStep);
+                if (item) {
+                    item.quantity = Math.max(1, item.quantity + Number(cartStep.dataset.step));
+                    renderCart();
+                    updateCartBadge();
+                }
+            }
+
+            const removeButton = event.target.closest("[data-remove-item]");
+            if (removeButton) {
+                state.cart = state.cart.filter(item => item.key !== removeButton.dataset.removeItem);
+                renderCart();
+                updateCartBadge();
+                showToast("Item removed.");
+            }
+        });
+
+        document.getElementById("sort-select").addEventListener("change", event => {
+            state.sort = event.target.value;
+            renderProducts();
+        });
+
+        document.getElementById("add-to-cart").addEventListener("click", () => {
+            addToCart(state.currentProductId, {
+                quantity: state.detailQuantity,
+                grind: state.selectedGrind,
+                size: state.selectedSize,
+                priceModifier: state.selectedPriceModifier
+            });
+        });
+
+        document.getElementById("brew-guide-button").addEventListener("click", openBrewGuide);
+        document.getElementById("close-modal").addEventListener("click", () => document.getElementById("brew-modal").classList.remove("active"));
+        document.getElementById("brew-modal").addEventListener("click", event => {
+            if (event.target.id === "brew-modal") document.getElementById("brew-modal").classList.remove("active");
+        });
+        document.getElementById("checkout-button").addEventListener("click", checkout);
+
+        renderProducts();
+        renderCart();
+        updateCartBadge();
+        updateShippingNote();
     </script>
 </body>
 </html>
